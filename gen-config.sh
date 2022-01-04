@@ -34,15 +34,25 @@ while read line; do
 done <./openssl_config_default.properties
 echo "===================="
 
-echo "====替换CA配置文件===="
-for element in $(find . -name "*.conf" -type f); do
-    conf_file=$element
-    handle_placeholder $conf_file
-done
-echo "====替换CA执行文件===="
-for element in $(find . -name "*.sh" -type f); do
-    conf_file=$element
-    handle_placeholder $conf_file
+# echo "====替换CA配置文件===="
+# for element in $(find . -name "*.conf" -type f); do
+#     conf_file=$element
+#     handle_placeholder $conf_file
+# done
+# echo "====替换CA执行文件===="
+# for element in $(find . -name "*.sh" -type f); do
+#     conf_file=$element
+#     handle_placeholder $conf_file
+# done
+
+#
+# 解决 $ find 命令 在不同-平台-命中问题
+# find -> ls
+# 
+echo "====替换CA相关文件===="
+for element in $(ls); do
+    ca_candidate_file=$element
+    handle_placeholder $ca_candidate_file
 done
 echo "================="
 echo "CA变量替换完成: $(pwd)"
